@@ -40,6 +40,29 @@ IGNORE 1 ROWS; #IGNORAR PRIMEIRA LINHA, QUE NESSE CASO SERÁ O CABECALHO
 
 SELECT * FROM Consultas;
 
+# total de consultas por especialidade organizado do maior para o menor 
+SELECT especialidade, COUNT(*) AS total_consultas
+FROM Consultas
+GROUP BY especialidade
+ORDER BY total_consultas DESC;
+
+# total de consultas por id medico orgazinado do maior para o menor
+SELECT id_medico, COUNT(*) AS total_consultas_medico
+FROM Consultas
+GROUP BY id_medico
+ORDER BY total_consultas_medico DESC;
+
+# total de consultas por clinica orgazinado do maior para o menor
+SELECT id_clinica, COUNT(*) AS total_consultas_clinica
+FROM Consultas
+GROUP BY id_clinica
+ORDER BY total_consultas_clinica DESC;
+
+# total de consultas por status orgazinado do maior para o menor
+SELECT situacao, COUNT(*) AS total_consultas_status
+FROM Consultas
+GROUP BY situacao
+ORDER BY total_consultas_status DESC;
 
 CREATE TABLE Avaliacoes (
     id_consulta INT,
@@ -88,3 +111,4 @@ IGNORE 1 ROWS; #IGNORAR PRIMEIRA LINHA, QUE NESSE CASO SERÁ O CABECALHO
 
 
 SELECT * FROM Pacientes;
+
