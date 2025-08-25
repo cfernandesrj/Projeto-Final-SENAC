@@ -14,17 +14,12 @@ FIELDS TERMINATED BY ',' #INFORMANDO QUE O SEPARADOR É VIRGULA
 LINES TERMINATED BY '\n' #INSERIR QUEBRA DE LINHA AO FINAL DE CADA LINHA
 IGNORE 1 ROWS; #IGNORAR PRIMEIRA LINHA, QUE NESSE CASO SERÁ O CABECALHO
 
-SHOW VARIABLES LIKE 'secure_file_priv';
-
-SELECT * FROM Clinicas;
-
-DROP TABLE IF EXISTS Consultas;
 
 CREATE TABLE Consultas (
-    id_consulta INT AUTO_INCREMENT PRIMARY KEY,
-    id_paciente INT,
-    id_medico INT,
-    id_clinica INT,
+   id_consulta INT AUTO_INCREMENT PRIMARY KEY,
+    id_paciente INT, FOREIGN KEY(id_paciente) REFERENCES Pacientes(id_paciente),
+    id_medico INT, FOREIGN KEY(id_medico) REFERENCES Medicos(id_medico),
+    id_clinica INT, FOREIGN KEY(id_clinica) REFERENCES Clinicas(ID_CLINICA),
     especialidade VARCHAR(50),
     data_hora_agendada DATETIME,
     data_hora_inicio DATETIME,
@@ -82,13 +77,13 @@ SELECT * FROM Avaliacoes;
 CREATE TABLE Medicos (
     id_medico INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50),
-    especialidade VARCHAR(50),
-    tempo_medio_atendimento INT
+    especialidade VARCHAR(50)
 );
+
 
 LOAD DATA INFILE 'C:/Users/cmjfe/Documents/Projeto-Final-SENAC/medicos.csv' # CARREGAMENTO DE ARQUIVO
 INTO TABLE Medicos
-FIELDS TERMINATED BY ',' #INFORMANDO QUE O SEPARADOR É VIRGULA
+FIELDS TERMINATED BY ';' #INFORMANDO QUE O SEPARADOR É VIRGULA
 LINES TERMINATED BY '\n' #INSERIR QUEBRA DE LINHA AO FINAL DE CADA LINHA
 IGNORE 1 ROWS; #IGNORAR PRIMEIRA LINHA, QUE NESSE CASO SERÁ O CABECALHO	
 
